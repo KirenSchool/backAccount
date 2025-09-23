@@ -6,47 +6,35 @@ public class BankAccount
     private String password;
     private boolean loggedIn;
 
-    public BankAccount(String name, int accountNum, double balance, String password, boolean loggedIn)
-    {
-      this.name = name;
-      this.accountNum = accountNum;
-      this.balance = balance;
-      this.password = password;
-      this.loggedIn = false;
-    }
-    public double getBalance()
-    {
-      if (loggedIn == true)
+    public class BankAccount{
+      private String name;
+      private int accountNum;
+      private double balance;
+      private String password;
+      private boolean loggedIn;
+
+      public BankAccount(String name, int accountNum, double balance, String password){
+        this.name = name;
+        this.accountNum = accountNum;
+        this.balance = balance;
+        this.password = password;
+        this.loggedIn = false;
+      }
+      public boolean logIn(String name, String password){
+        if (this.name.equals(name) && this.password.equals(password)){
+          loggedIn = true;
+        }
+        return loggedIn;
+      }
+      public void logOut(){
+        loggedIn = false;
+      }
+      public double getBalance(){
+        if (loggedIn){
           return balance;
-      else
-          throw new IllegalStateException("Not Logged In");
-
-    }
-    public void logIn(String password)
-    {
-      if (password.equals(this.password))
-      {
-        loggedIn = true;
+        }
+        throw new IllegalStateException("Not Logged In")
       }
     }
-
-    public void logOut()
-    {
-      loggedIn = false;
-    }
-
-    public double deposit(double amount)
-    {
-      if (loggedIn == true)
-      {
-        if (amount > 0)
-          this.balance += amount;
-        return this.balance;
-      }
-    }
-    public static void main(String[] args)
-    {
-        BankAccount account1 = new BankAccount("checking ", 11111, 1000.00, "password");
-        System.out.println(account1);
     }
   }
